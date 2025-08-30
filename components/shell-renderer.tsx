@@ -5,13 +5,52 @@ import type { NodeTy } from "@/lib/interpreter";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 
-function TextNode({ text }: { text: string }) {
-  return <span>{text}</span>;
+function TextNode({
+  text,
+  variant,
+  size,
+  weight,
+}: {
+  text: string;
+  variant?: string;
+  size?: string;
+  weight?: string | boolean;
+}) {
+  const variantClass =
+    variant === "muted" ? "text-muted-foreground" : undefined;
+  const sizeClass =
+    size === "sm"
+      ? "text-sm"
+      : size === "lg"
+      ? "text-lg"
+      : size === "xl"
+      ? "text-xl"
+      : undefined;
+  const weightClass =
+    weight === "bold" || weight === true
+      ? "font-bold"
+      : weight === "semibold"
+      ? "font-semibold"
+      : weight === "medium"
+      ? "font-medium"
+      : undefined;
+  return (
+    <span
+      className={cn(
+        "whitespace-pre-wrap leading-6",
+        variantClass,
+        sizeClass,
+        weightClass
+      )}
+    >
+      {text}
+    </span>
+  );
 }
 
 function ListNode({ items }: { items: string[] }) {
   return (
-    <ul className={cn("list-inside", "list-disc", "space-y-1")}>
+    <ul className="list-disc ml-5 space-y-1 leading-6">
       {items.map((item, idx) => (
         <li key={idx}>{item}</li>
       ))}
@@ -154,6 +193,42 @@ export function RenderNode({ node }: { node: NodeTy }) {
     <RenderNode key={i} node={c} />
   ));
   switch (name) {
+    case "Card": {
+      return (
+        <div className="rounded-md border border-border bg-transparent p-3 md:p-4">
+          {renderedChildren}
+        </div>
+      );
+    }
+    case "Heading": {
+      const level = (attrs.level as number) ?? 3;
+      const align = (attrs.align as string) ?? "left";
+      const sizeClass =
+        level === 1
+          ? "text-xl md:text-2xl"
+          : level === 2
+          ? "text-lg md:text-xl"
+          : level === 3
+          ? "text-base md:text-lg"
+          : "text-base";
+      const alignClass =
+        align === "center"
+          ? "text-center"
+          : align === "right"
+          ? "text-right"
+          : "text-left";
+      const textContent = (node.children ?? [])
+        .map((c) => ("text" in c ? c.text : ""))
+        .join("");
+      return (
+        <div
+          className={cn("font-semibold tracking-tight", sizeClass, alignClass)}
+        >
+          {textContent}
+        </div>
+      );
+    }
+    // Muted/Small are no longer separate nodes; use Text variant/size attrs instead
     case "Grid":
       return (
         <GridNode
@@ -209,12 +284,19 @@ export function RenderNode({ node }: { node: NodeTy }) {
       const textContent = (node.children ?? [])
         .map((c) => ("text" in c ? c.text : ""))
         .join("");
-      return <TextNode text={textContent} />;
+      return (
+        <TextNode
+          text={textContent}
+          variant={attrs.variant as string | undefined}
+          size={attrs.size as string | undefined}
+          weight={attrs.weight as string | boolean | undefined}
+        />
+      );
     }
     case "List": {
       const items = (node.children ?? [])
         .filter((c) => "text" in c)
-        .map((c) => (c as { text: string }).text);
+        .map((c) => c.text);
       return <ListNode items={items} />;
     }
     default:

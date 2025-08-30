@@ -1,20 +1,23 @@
 "use client";
 
-import { useEffect, useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import { useShell } from "@/components/shell-provider";
 import { ShellRenderer } from "@/components/shell-renderer";
+import { Separator } from "@/components/ui/separator";
 
 function Prompt() {
   const { shellState } = useShell();
   const cwd = "/" + shellState.cwd.join("/");
   return (
-    <div className="flex items-start gap-2 w-full">
+    <div className="flex gap-2 items-baseline">
       <div className="shrink-0 select-none">
         <span className="text-primary">world</span>
         <span className="text-muted-foreground">@</span>
         <span className="text-primary">jaylee.xyz</span>
-        <span className="text-green-600 dark:text-green-400">{cwd || "/"}</span>
-        <span className="ml-2 text-muted-foreground">𝝺</span>
+        <span className="ml-0.5 text-orange-600 dark:text-orange-400">
+          {cwd || "/"}
+        </span>
+        <span className="ml-2 text-muted-foreground">$</span>
       </div>
       <InputLine />
     </div>
@@ -48,16 +51,17 @@ function InputLine() {
 function History() {
   const { shellState } = useShell();
   return (
-    <div className="w-full space-y-4">
+    <div>
       {shellState.history.map((h) => (
-        <div key={h.id} className="w-full">
+        <div key={h.id}>
           <div className="flex gap-2">
-            <div className="text-muted-foreground font-mono">{"𝝺"}</div>
-            <div className="font-mono break-words">{h.input}</div>
+            <div className="text-muted-foreground">$</div>
+            <div className="break-words">{h.input}</div>
           </div>
-          <div className="mt-2">
+          <div className="mt-1.5">
             <ShellRenderer nodes={h.output} />
           </div>
+          <Separator className="my-3" />
         </div>
       ))}
     </div>
@@ -66,6 +70,8 @@ function History() {
 
 export default function InteractiveShell() {
   const { shellState: state, run } = useShell();
+  const endRef = useRef<HTMLDivElement | null>(null);
+
   useEffect(() => {
     if (state.history.length > 0) return;
     (async () => {
@@ -75,10 +81,17 @@ export default function InteractiveShell() {
     })();
   }, [state.history.length, run]);
 
+  useEffect(() => {
+    endRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
+  }, [state.history.length]);
+
   return (
-    <div className="w-full max-w-3xl mx-auto py-10 px-4">
-      <History />
-      <Prompt />
-    </div>
+    <>
+      <div className="w-full max-w-3xl mx-auto py-10 px-4">
+        <History />
+        <Prompt />
+      </div>
+      <div ref={endRef} />
+    </>
   );
 }

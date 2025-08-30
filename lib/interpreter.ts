@@ -38,31 +38,51 @@ export const BUILTIN_COMMANDS: Record<
     description: "Display Jay Lee's information",
     handler: () => {
       return {
-        name: "Grid",
-        attrs: { gap: 2, base: 1, md: 2, mdTemplate: "auto_1fr" },
+        name: "Card",
+        attrs: {},
         children: [
           {
-            name: "Image",
-            attrs: { src: "/profile.jpg", alt: "Jay Lee's profile image" },
-          },
-          {
-            name: "VStack",
-            attrs: { gap: 1 },
+            name: "Grid",
+            attrs: { gap: 4, base: 1, mdTemplate: "auto_1fr" },
             children: [
               {
-                name: "Text",
-                attrs: { size: "lg" },
-                children: [{ text: "Jay Lee" }],
+                name: "Image",
+                attrs: {
+                  src: "/profile.jpg",
+                  alt: "Jay Lee's profile image",
+                  width: 160,
+                  height: 160,
+                  rounded: 1,
+                },
               },
               {
-                name: "Text",
-                attrs: { variant: "muted" },
-                children: [{ text: "M.S. student in CSE, PL/HCI" }],
-              },
-              {
-                name: "Text",
-                attrs: { size: "sm" },
-                children: [{ text: "Researching PL and HCI." }],
+                name: "VStack",
+                attrs: { gap: 1 },
+                children: [
+                  {
+                    name: "Text",
+                    attrs: { size: "xl", weight: "semibold" },
+                    children: [{ text: "Jay Lee" }],
+                  },
+                  {
+                    name: "Text",
+                    attrs: { variant: "muted" },
+                    children: [
+                      {
+                        text: "M.S. student in Computer Science | Programming Languages",
+                      },
+                    ],
+                  },
+                  {
+                    name: "Text",
+                    attrs: { size: "sm" },
+                    children: [
+                      {
+                        text: "Applying programming language theory, static analysis, and program synthesis to build ergonomic, reliable tools for real-world programmers.",
+                      },
+                    ],
+                  },
+                ],
               },
             ],
           },
@@ -74,56 +94,62 @@ export const BUILTIN_COMMANDS: Record<
     description: "Show recent news",
     handler: () => {
       return {
-        name: "Grid",
-        attrs: { gap: 2, base: 1, md: 2, mdTemplate: "auto_1fr" },
+        name: "Card",
+        attrs: {},
         children: [
           {
             name: "Grid",
-            attrs: { gap: 2, base: 1, md: 1, mdTemplate: "auto_1fr" },
+            attrs: { gap: 4, base: 1, md: 2 },
             children: [
               {
-                name: "Text",
-                attrs: { variant: "muted" },
-                children: [{ text: "Recent research" }],
-              },
-              {
-                name: "List",
-                attrs: {},
+                name: "VStack",
+                attrs: { gap: 2 },
                 children: [
                   {
-                    text: "OOPSLA 2025 — React-tRace: A Semantics for Understanding React Hooks (Accepted)",
+                    name: "Heading",
+                    attrs: { level: 3 },
+                    children: [{ text: "Recent publications" }],
                   },
                   {
-                    text: "UIST 2025 Posters — ReDemon UI: Reactive Synthesis by Demonstration for Web UI (Accepted)",
-                  },
-                  {
-                    text: "PLDI 2025 SRC — Retargeting an Abstract Interpreter for a New Language by Partial Evaluation (2nd place 🥈)",
+                    name: "List",
+                    attrs: {},
+                    children: [
+                      {
+                        text: "OOPSLA 2025 — React-tRace: A Semantics for Understanding React Hooks (Accepted)",
+                      },
+                      {
+                        text: "UIST 2025 Posters — ReDemon UI: Reactive Synthesis by Demonstration for Web UI (Accepted)",
+                      },
+                      {
+                        text: "PLDI 2025 SRC — Retargeting an Abstract Interpreter for a New Language by Partial Evaluation (2nd place 🥈)",
+                      },
+                    ],
                   },
                 ],
               },
-            ],
-          },
-          {
-            name: "Grid",
-            attrs: { gap: 2, base: 1, md: 1, mdTemplate: "auto_1fr" },
-            children: [
               {
-                name: "Text",
-                attrs: { variant: "muted" },
-                children: [{ text: "Recent honors" }],
-              },
-              {
-                name: "List",
-                attrs: {},
+                name: "VStack",
+                attrs: { gap: 2 },
                 children: [
                   {
-                    text: "Aug 2025 — SIGPL Summer School Presentation Award (1st place 🥇)",
+                    name: "Heading",
+                    attrs: { level: 3 },
+                    children: [{ text: "Recent honors" }],
                   },
                   {
-                    text: "Jun 2025 — PLDI 2025 SRC Graduate Category (2nd place 🥈)",
-                  },
-                  {
-                    text: "Sep 2024 — Outstanding Teaching Assistant Award (SNU Engineering)",
+                    name: "List",
+                    attrs: {},
+                    children: [
+                      {
+                        text: "Aug 2025 — SIGPL Summer School Presentation Award (1st place 🥇)",
+                      },
+                      {
+                        text: "Jun 2025 — PLDI 2025 SRC Graduate Category (2nd place 🥈)",
+                      },
+                      {
+                        text: "Sep 2024 — Outstanding Teaching Assistant Award (SNU Engineering)",
+                      },
+                    ],
                   },
                 ],
               },
