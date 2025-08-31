@@ -10,8 +10,8 @@ import { ModeToggle } from "@/components/mode-toggle";
 
 export default function NavBar() {
   return (
-    <div className="sticky top-0 z-50 bg-background/80 backdrop-blur-lg py-5">
-      <div className="flex justify-between items-end gap-2">
+    <div className="sticky top-0 z-50 w-full bg-background/80 backdrop-blur-lg py-5">
+      <div className="mx-auto w-full max-w-3xl flex justify-between items-end gap-2 px-2">
         <Link
           href="/"
           className="text-lg sm:text-2xl lg:text-3xl font-bold font-title"

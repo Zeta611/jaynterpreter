@@ -69,8 +69,8 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
+          <NavBar />
           <div className="w-full max-w-3xl mx-auto">
-            <NavBar />
             <div className="my-4 mx-2">
               <ShellProvider>{children}</ShellProvider>
             </div>
