@@ -558,11 +558,6 @@ export const BUILTIN_COMMANDS: Record<
               },
             ],
           },
-          {
-            name: "Text",
-            attrs: { variant: "muted", size: "sm" },
-            children: [{ text: "Bolded in CV indicate frequent use." }],
-          },
         ],
       };
     },
