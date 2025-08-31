@@ -1,10 +1,14 @@
 import type { Metadata } from "next";
-import { Megrim, Pixelify_Sans, Rubik } from "next/font/google";
+import { Hahmlet, Michroma, Pixelify_Sans, Rubik } from "next/font/google";
 import "./globals.css";
+import { ThemeProvider } from "@/components/theme-provider";
 import ShellProvider from "@/components/shell-provider";
+import NavBar from "@/components/nav-bar";
+import { cn } from "@/lib/utils";
+import Script from "next/script";
 
-const megrim = Megrim({
-  variable: "--font-megrim",
+const michroma = Michroma({
+  variable: "--font-michroma",
   weight: "400",
   subsets: ["latin"],
 });
@@ -20,9 +24,14 @@ const pixelify = Pixelify_Sans({
   subsets: ["latin"],
 });
 
+const hahmlet = Hahmlet({
+  variable: "--font-hahmlet",
+  subsets: ["latin-ext"],
+});
+
 export const metadata: Metadata = {
-  title: "Jay Lee's Home",
-  description: "Jay Lee's Cozy Corner on the Internet",
+  title: "Jay Lee's Seeking the Tao of Programming",
+  description: "This is Jay Lee's cozy corner on the Internet.",
 };
 
 export default function RootLayout({
@@ -31,11 +40,42 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css"
+          integrity="sha384-5TcZemv2l/9On385z///+d7MSYlvIEw9FuZTIdZ14vJLqWphw7e7ZPuOiCHJcFCP"
+          crossOrigin="anonymous"
+        />
+        <Script
+          src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/contrib/copy-tex.min.js"
+          integrity="sha384-HORx6nWi8j5/mYA+y57/9/CZc5z8HnEw4WUZWy5yOn9ToKBv1l58vJaufFAn9Zzi"
+          crossOrigin="anonymous"
+        />
+      </head>
       <body
-        className={`${megrim.className} ${rubik.variable} ${pixelify.className} antialiased`}
+        className={cn(
+          michroma.variable,
+          rubik.variable,
+          pixelify.variable,
+          hahmlet.variable,
+          "antialiased font-sans"
+        )}
       >
-        <ShellProvider>{children}</ShellProvider>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <div className="w-full max-w-3xl mx-auto">
+            <NavBar />
+            <div className="my-4 mx-2">
+              <ShellProvider>{children}</ShellProvider>
+            </div>
+          </div>
+        </ThemeProvider>
       </body>
     </html>
   );

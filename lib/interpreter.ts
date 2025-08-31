@@ -25,12 +25,36 @@ export const BUILTIN_COMMANDS: Record<
   help: {
     description: "Show available commands",
     handler: () => {
+      const items = Object.keys(BUILTIN_COMMANDS).map(
+        (k) =>
+          ({
+            name: "HStack",
+            attrs: { gap: 2 },
+            children: [
+              { name: "Cmd", attrs: { cmd: k }, children: [{ text: k }] },
+              {
+                name: "Text",
+                attrs: { variant: "muted" },
+                children: [{ text: `${BUILTIN_COMMANDS[k].description}` }],
+              },
+            ],
+          } as NodeTy)
+      );
       return {
-        text:
-          "Available commands:\n" +
-          Object.keys(BUILTIN_COMMANDS)
-            .map((k) => `- ${k}: ${BUILTIN_COMMANDS[k].description}`)
-            .join("\n"),
+        name: "VStack",
+        attrs: { gap: 2 },
+        children: [
+          {
+            name: "Text",
+            attrs: {},
+            children: [{ text: "Available commands:" }],
+          },
+          {
+            name: "List",
+            attrs: {},
+            children: items,
+          },
+        ],
       };
     },
   },
@@ -111,17 +135,151 @@ export const BUILTIN_COMMANDS: Record<
                     children: [{ text: "Recent publications" }],
                   },
                   {
-                    name: "List",
-                    attrs: {},
+                    name: "VStack",
+                    attrs: { gap: 3 },
                     children: [
                       {
-                        text: "OOPSLA 2025 — React-tRace: A Semantics for Understanding React Hooks (Accepted)",
+                        name: "VStack",
+                        attrs: { gap: 1 },
+                        children: [
+                          {
+                            name: "Text",
+                            attrs: {},
+                            children: [
+                              {
+                                text: "OOPSLA 2025 — React‑tRace: A Semantics for Understanding React Hooks (Accepted)",
+                              },
+                            ],
+                          },
+                          {
+                            name: "HStack",
+                            attrs: { gap: 2 },
+                            children: [
+                              {
+                                name: "Link",
+                                attrs: {
+                                  href: "https://doi.org/10.48550/arXiv.2507.05234",
+                                  icon: "paper",
+                                },
+                                children: [{ text: "paper" }],
+                              },
+                              {
+                                name: "Link",
+                                attrs: {
+                                  href: "https://github.com/Zeta611/react-trace",
+                                  icon: "github",
+                                },
+                                children: [{ text: "github" }],
+                              },
+                              {
+                                name: "Link",
+                                attrs: {
+                                  href: "https://2025.splashcon.org/details/OOPSLA/54/",
+                                  icon: "link",
+                                },
+                                children: [{ text: "event" }],
+                              },
+                              {
+                                name: "Link",
+                                attrs: {
+                                  href: "https://react-trace.vercel.app/",
+                                  icon: "link",
+                                },
+                                children: [{ text: "live" }],
+                              },
+                            ],
+                          },
+                        ],
                       },
                       {
-                        text: "UIST 2025 Posters — ReDemon UI: Reactive Synthesis by Demonstration for Web UI (Accepted)",
+                        name: "VStack",
+                        attrs: { gap: 1 },
+                        children: [
+                          {
+                            name: "Text",
+                            attrs: {},
+                            children: [
+                              {
+                                text: "UIST 2025 Posters — ReDemon UI: Reactive Synthesis by Demonstration for Web UI (Accepted)",
+                              },
+                            ],
+                          },
+                          {
+                            name: "HStack",
+                            attrs: { gap: 2 },
+                            children: [
+                              {
+                                name: "Link",
+                                attrs: {
+                                  href: "https://doi.org/10.48550/arXiv.2507.10099",
+                                  icon: "paper",
+                                },
+                                children: [{ text: "paper" }],
+                              },
+                              {
+                                name: "Link",
+                                attrs: {
+                                  href: "https://github.com/Zeta611/redemon-ui",
+                                  icon: "github",
+                                },
+                                children: [{ text: "github" }],
+                              },
+                              {
+                                name: "Link",
+                                attrs: {
+                                  href: "https://redemon-ui.vercel.app/",
+                                  icon: "link",
+                                },
+                                children: [{ text: "live" }],
+                              },
+                            ],
+                          },
+                        ],
                       },
                       {
-                        text: "PLDI 2025 SRC — Retargeting an Abstract Interpreter for a New Language by Partial Evaluation (2nd place 🥈)",
+                        name: "VStack",
+                        attrs: { gap: 1 },
+                        children: [
+                          {
+                            name: "Text",
+                            attrs: {},
+                            children: [
+                              {
+                                text: "PLDI 2025 SRC — Retargeting an Abstract Interpreter for a New Language by Partial Evaluation (2nd place 🥈)",
+                              },
+                            ],
+                          },
+                          {
+                            name: "HStack",
+                            attrs: { gap: 2 },
+                            children: [
+                              {
+                                name: "Link",
+                                attrs: {
+                                  href: "https://doi.org/10.48550/arXiv.2507.04316",
+                                  icon: "paper",
+                                },
+                                children: [{ text: "paper" }],
+                              },
+                              {
+                                name: "Link",
+                                attrs: {
+                                  href: "https://www.youtube.com/live/BRhBv_aYNks?t=5750",
+                                  icon: "video",
+                                },
+                                children: [{ text: "video" }],
+                              },
+                              {
+                                name: "Link",
+                                attrs: {
+                                  href: "https://pldi25.sigplan.org/details/pldi-2025-src/1/",
+                                  icon: "link",
+                                },
+                                children: [{ text: "event" }],
+                              },
+                            ],
+                          },
+                        ],
                       },
                     ],
                   },
@@ -141,13 +299,19 @@ export const BUILTIN_COMMANDS: Record<
                     attrs: {},
                     children: [
                       {
-                        text: "Aug 2025 — SIGPL Summer School Presentation Award (1st place 🥇)",
+                        text: "Aug 2025 — SIGPL Summer School 2025 Presentation Award (1st place 🥇)",
                       },
                       {
                         text: "Jun 2025 — PLDI 2025 SRC Graduate Category (2nd place 🥈)",
                       },
                       {
                         text: "Sep 2024 — Outstanding Teaching Assistant Award (SNU Engineering)",
+                      },
+                      {
+                        text: "Aug 2024 — SIGPL Summer School 2024 Presentation Award (2nd place 🥈)",
+                      },
+                      {
+                        text: "Mar 2018–Feb 2024 — Presidential Science Scholarship (Korea Student Aid Foundation)",
                       },
                     ],
                   },

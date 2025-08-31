@@ -1,4 +1,6 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
+@config "../tailwind.config.mjs";
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
@@ -6,7 +8,8 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-title: var(--font-megrim);
+  --font-title: var(--font-michroma);
+  --font-serif: var(--font-hahmlet);
   --font-sans: var(--font-rubik);
   --font-mono: var(--font-pixelify);
   --color-sidebar-ring: var(--sidebar-ring);

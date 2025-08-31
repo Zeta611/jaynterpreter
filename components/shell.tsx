@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { useShell } from "@/components/shell-provider";
 import { ShellRenderer } from "@/components/shell-renderer";
-import { Separator } from "@/components/ui/separator";
 
 function Prompt() {
   const { shellState } = useShell();
@@ -53,7 +52,7 @@ function History() {
   return (
     <div>
       {shellState.history.map((h) => (
-        <div key={h.id}>
+        <div key={h.id} className="mb-5.5">
           <div className="flex gap-2">
             <div className="text-muted-foreground">$</div>
             <div className="break-words">{h.input}</div>
@@ -61,7 +60,6 @@ function History() {
           <div className="mt-1.5">
             <ShellRenderer nodes={h.output} />
           </div>
-          <Separator className="my-3" />
         </div>
       ))}
     </div>
@@ -86,12 +84,10 @@ export default function InteractiveShell() {
   }, [state.history.length]);
 
   return (
-    <>
-      <div className="w-full max-w-3xl mx-auto py-10 px-4">
-        <History />
-        <Prompt />
-      </div>
+    <div className="font-mono">
+      <History />
+      <Prompt />
       <div ref={endRef} />
-    </>
+    </div>
   );
 }

@@ -4,6 +4,8 @@ import React from "react";
 import type { NodeTy } from "@/lib/interpreter";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
+import { useShell } from "@/components/shell-provider";
+import { FileText, Github, Link, Video } from "lucide-react";
 
 function TextNode({
   text,
@@ -48,11 +50,13 @@ function TextNode({
   );
 }
 
-function ListNode({ items }: { items: string[] }) {
+function ListNode({ nodes }: { nodes: NodeTy[] }) {
   return (
     <ul className="list-disc ml-5 space-y-1 leading-6">
-      {items.map((item, idx) => (
-        <li key={idx}>{item}</li>
+      {nodes.map((child, idx) => (
+        <li key={idx}>
+          {"text" in child ? child.text : <RenderNode node={child} />}
+        </li>
       ))}
     </ul>
   );
@@ -87,6 +91,39 @@ function ImageNode({
         className={cn("object-cover w-full h-full", roundedClass)}
       />
     </div>
+  );
+}
+
+function LinkNode({
+  href,
+  label,
+  icon,
+}: {
+  href: string;
+  label?: string;
+  icon?: string;
+}) {
+  const IconComp =
+    icon === "github"
+      ? Github
+      : icon === "paper"
+      ? FileText
+      : icon === "video"
+      ? Video
+      : Link;
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noreferrer"
+      className={cn(
+        "inline-flex items-center gap-1 px-2 py-0.5 border rounded-sm text-xs",
+        "hover:bg-muted/40 transition-colors"
+      )}
+    >
+      <IconComp className="h-3.5 w-3.5" />
+      <span>{label ?? href}</span>
+    </a>
   );
 }
 
@@ -185,6 +222,7 @@ function GridNode({
 }
 
 export function RenderNode({ node }: { node: NodeTy }) {
+  const shell = useShell();
   if ("text" in node) return <TextNode text={node.text} />;
 
   const name = node.name;
@@ -280,6 +318,37 @@ export function RenderNode({ node }: { node: NodeTy }) {
           alt={(attrs.alt as string) ?? ""}
         />
       );
+    case "Link": {
+      const label = (node.children ?? [])
+        .map((c) => ("text" in c ? c.text : ""))
+        .join("");
+      return (
+        <LinkNode
+          href={String(attrs.href ?? "#")}
+          label={label}
+          icon={attrs.icon as string | undefined}
+        />
+      );
+    }
+    case "Cmd": {
+      const label = (node.children ?? [])
+        .map((c) => ("text" in c ? c.text : ""))
+        .join("");
+      const cmdAttr = attrs.cmd as string | undefined;
+      const cmd = String(cmdAttr ?? label);
+      return (
+        <button
+          type="button"
+          onClick={() => shell.run(cmd)}
+          className={cn(
+            "inline-flex items-center px-2 py-0.5 border rounded-sm text-sm",
+            "hover:bg-muted/40 transition-colors"
+          )}
+        >
+          {label || cmd}
+        </button>
+      );
+    }
     case "Text": {
       const textContent = (node.children ?? [])
         .map((c) => ("text" in c ? c.text : ""))
@@ -294,10 +363,7 @@ export function RenderNode({ node }: { node: NodeTy }) {
       );
     }
     case "List": {
-      const items = (node.children ?? [])
-        .filter((c) => "text" in c)
-        .map((c) => c.text);
-      return <ListNode items={items} />;
+      return <ListNode nodes={node.children ?? []} />;
     }
     default:
       return <pre>{JSON.stringify(node, null, 2)}</pre>;
