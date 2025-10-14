@@ -158,7 +158,7 @@ export const BUILTIN_COMMANDS: Record<
                               {
                                 name: "Link",
                                 attrs: {
-                                  href: "https://doi.org/10.48550/arXiv.2507.05234",
+                                  href: "https://doi.org/10.1145/3763067",
                                   icon: "paper",
                                 },
                                 children: [{ text: "paper" }],
@@ -211,7 +211,7 @@ export const BUILTIN_COMMANDS: Record<
                               {
                                 name: "Link",
                                 attrs: {
-                                  href: "https://doi.org/10.48550/arXiv.2507.10099",
+                                  href: "https://doi.org/10.1145/3746058.3758454",
                                   icon: "paper",
                                 },
                                 children: [{ text: "paper" }],
@@ -403,7 +403,7 @@ export const BUILTIN_COMMANDS: Record<
                         name: "HStack",
                         attrs: { gap: 2 },
                         children: [
-                          { name: "Link", attrs: { href: "https://doi.org/10.48550/arXiv.2507.05234", icon: "paper" }, children: [{ text: "paper" }] },
+                          { name: "Link", attrs: { href: "https://doi.org/10.1145/3763067", icon: "paper" }, children: [{ text: "paper" }] },
                           { name: "Link", attrs: { href: "https://github.com/Zeta611/react-trace", icon: "github" }, children: [{ text: "github" }] },
                           { name: "Link", attrs: { href: "https://2025.splashcon.org/details/OOPSLA/54/", icon: "link" }, children: [{ text: "event" }] },
                           { name: "Link", attrs: { href: "https://react-trace.vercel.app/", icon: "link" }, children: [{ text: "live" }] },
@@ -421,7 +421,7 @@ export const BUILTIN_COMMANDS: Record<
                         name: "HStack",
                         attrs: { gap: 2 },
                         children: [
-                          { name: "Link", attrs: { href: "https://doi.org/10.48550/arXiv.2507.10099", icon: "paper" }, children: [{ text: "paper" }] },
+                          { name: "Link", attrs: { href: "https://doi.org/10.1145/3746058.3758454", icon: "paper" }, children: [{ text: "paper" }] },
                           { name: "Link", attrs: { href: "https://github.com/Zeta611/redemon-ui", icon: "github" }, children: [{ text: "github" }] },
                           { name: "Link", attrs: { href: "https://redemon-ui.vercel.app/", icon: "link" }, children: [{ text: "live" }] },
                         ],
