@@ -93,7 +93,7 @@ export const BUILTIN_COMMANDS: Record<
                     attrs: { variant: "muted" },
                     children: [
                       {
-                        text: "M.S. student in Computer Science | Programming Languages",
+                        text: "M.S. student in Computer Science and Engineering at Seoul National University (SNU)",
                       },
                     ],
                   },
@@ -102,7 +102,7 @@ export const BUILTIN_COMMANDS: Record<
                     attrs: { size: "sm" },
                     children: [
                       {
-                        text: "Applying programming language theory, static analysis, and program synthesis to build ergonomic, reliable tools for real-world programmers.",
+                        text: "Applying programming language theory, static analysis, and program synthesis to build reliable tools and abstractions for real-world programmers.",
                       },
                     ],
                   },
@@ -138,6 +138,43 @@ export const BUILTIN_COMMANDS: Record<
                     name: "VStack",
                     attrs: { gap: 3 },
                     children: [
+                      {
+                        name: "VStack",
+                        attrs: { gap: 1 },
+                        children: [
+                          {
+                            name: "Text",
+                            attrs: {},
+                            children: [
+                              {
+                                text: "PEPM 2026 — Retargeting an Abstract Interpreter for a New Language by Partial Evaluation (Short Paper)",
+                              },
+                            ],
+                          },
+                          {
+                            name: "HStack",
+                            attrs: { gap: 2 },
+                            children: [
+                              {
+                                name: "Link",
+                                attrs: {
+                                  href: "https://ropas.snu.ac.kr/~jhlee/pepm26.pdf",
+                                  icon: "paper",
+                                },
+                                children: [{ text: "paper" }],
+                              },
+                              {
+                                name: "Link",
+                                attrs: {
+                                  href: "https://popl26.sigplan.org/home/PEPM-2026",
+                                  icon: "link",
+                                },
+                                children: [{ text: "event" }],
+                              },
+                            ],
+                          },
+                        ],
+                      },
                       {
                         name: "VStack",
                         attrs: { gap: 1 },
