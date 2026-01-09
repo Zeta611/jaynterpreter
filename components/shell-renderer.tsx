@@ -5,7 +5,7 @@ import type { NodeTy } from "@/lib/interpreter";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { useShell } from "@/components/shell-provider";
-import { FileText, Github, Link, Video } from "lucide-react";
+import { FileText, Github, Link, Mail, Video } from "lucide-react";
 
 function TextNode({
   text,
@@ -110,6 +110,8 @@ function LinkNode({
       ? FileText
       : icon === "video"
       ? Video
+      : icon === "mail"
+      ? Mail
       : Link;
   return (
     <a
@@ -135,6 +137,7 @@ function GridNode({
   xl,
   mdTemplate,
   gap = 4,
+  align,
   children,
 }: {
   base?: number;
@@ -144,6 +147,7 @@ function GridNode({
   xl?: number;
   mdTemplate?: "auto_1fr" | "1fr_auto";
   gap?: number;
+  align?: "center" | "start" | "end";
   children: React.ReactNode;
 }) {
   const gapClass =
@@ -208,6 +212,13 @@ function GridNode({
       ? "md:[grid-template-columns:1fr_auto]"
       : undefined;
 
+  const alignClass =
+    align === "center"
+      ? "items-center"
+      : align === "end"
+      ? "items-end"
+      : undefined;
+
   const colClass = cn(
     "grid",
     gapClass,
@@ -216,7 +227,8 @@ function GridNode({
     mdCols,
     lgCols,
     xlCols,
-    templateMd
+    templateMd,
+    alignClass
   );
   return <div className={colClass}>{children}</div>;
 }
@@ -281,6 +293,11 @@ export function RenderNode({ node }: { node: NodeTy }) {
               : undefined
           }
           gap={(attrs.gap as number) ?? 4}
+          align={
+            attrs.align === "center" || attrs.align === "end"
+              ? (attrs.align as "center" | "end")
+              : undefined
+          }
         >
           {renderedChildren}
         </GridNode>
@@ -316,6 +333,9 @@ export function RenderNode({ node }: { node: NodeTy }) {
         <ImageNode
           src={String(attrs.src ?? "")}
           alt={(attrs.alt as string) ?? ""}
+          width={attrs.width as number | undefined}
+          height={attrs.height as number | undefined}
+          rounded={attrs.rounded as boolean | undefined}
         />
       );
     case "Link": {

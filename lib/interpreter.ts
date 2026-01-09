@@ -3,7 +3,7 @@ export type NodeTy =
   | { text: string }
   | {
       name: string;
-      attrs: Record<string, string | number | undefined>;
+      attrs: Record<string, string | number | boolean | undefined>;
       children?: NodeTy[];
     };
 
@@ -38,7 +38,7 @@ export const BUILTIN_COMMANDS: Record<
                 children: [{ text: `${BUILTIN_COMMANDS[k].description}` }],
               },
             ],
-          }) as NodeTy,
+          } as NodeTy)
       );
       return {
         name: "VStack",
@@ -67,16 +67,16 @@ export const BUILTIN_COMMANDS: Record<
         children: [
           {
             name: "Grid",
-            attrs: { gap: 4, base: 1, mdTemplate: "auto_1fr" },
+            attrs: { gap: 4, base: 1, mdTemplate: "auto_1fr", align: "center" },
             children: [
               {
                 name: "Image",
                 attrs: {
                   src: "/profile.jpg",
                   alt: "Jay Lee's profile image",
-                  width: 160,
-                  height: 160,
-                  rounded: 1,
+                  width: 140,
+                  height: 140,
+                  rounded: true,
                 },
               },
               {
@@ -102,7 +102,37 @@ export const BUILTIN_COMMANDS: Record<
                     attrs: { size: "sm" },
                     children: [
                       {
-                        text: "Applying programming language theory, static analysis, and program synthesis to build reliable tools and abstractions for real-world programmers.",
+                        text: "Building semantically-grounded tools and abstractions to help domain experts easily create reliable systems, using formal semantics, program synthesis, and static analysis.",
+                      },
+                    ],
+                  },
+                  {
+                    name: "HStack",
+                    attrs: { gap: 2 },
+                    children: [
+                      {
+                        name: "Link",
+                        attrs: {
+                          href: "https://github.com/Zeta611",
+                          icon: "github",
+                        },
+                        children: [{ text: "github" }],
+                      },
+                      {
+                        name: "Link",
+                        attrs: {
+                          href: "mailto:jaeho.lee@snu.ac.kr",
+                          icon: "mail",
+                        },
+                        children: [{ text: "email" }],
+                      },
+                      {
+                        name: "Link",
+                        attrs: {
+                          href: "https://docs.google.com/viewer?url=https://raw.githubusercontent.com/Zeta611/curriculum-vitae/main/cv.pdf",
+                          icon: "paper",
+                        },
+                        children: [{ text: "CV" }],
                       },
                     ],
                   },
