@@ -188,7 +188,7 @@ export const BUILTIN_COMMANDS: Record<
                               {
                                 name: "Link",
                                 attrs: {
-                                  href: "https://ropas.snu.ac.kr/~jhlee/pepm26.pdf",
+                                  href: "/papers/pepm26-system_pearl.pdf",
                                   icon: "paper",
                                 },
                                 children: [{ text: "paper" }],
