@@ -152,8 +152,8 @@ export const BUILTIN_COMMANDS: Record<
         attrs: {},
         children: [
           {
-            name: "Grid",
-            attrs: { gap: 4, base: 1, md: 2 },
+            name: "VStack",
+            attrs: { gap: 4 },
             children: [
               {
                 name: "VStack",
@@ -162,12 +162,100 @@ export const BUILTIN_COMMANDS: Record<
                   {
                     name: "Heading",
                     attrs: { level: 3 },
-                    children: [{ text: "Recent publications" }],
+                    children: [{ text: "🚀 What\u2019s happening" }],
                   },
                   {
-                    name: "VStack",
-                    attrs: { gap: 3 },
+                    name: "Text",
+                    attrs: {},
                     children: [
+                      {
+                        text: "I\u2019m traveling across the US this month to explore what\u2019s next! 🎉 Feel free to reach out if you want to grab coffee \u2014 I\u2019m open to advice, research ideas, and conversations of all kinds!",
+                      },
+                    ],
+                  },
+                  {
+                    name: "List",
+                    attrs: {},
+                    children: [
+                      {
+                        text: "Mar 5\u20137 \u2014 MIT EECS Visit Days",
+                      },
+                      {
+                        text: "Mar 9\u201310 \u2014 PLATEAU workshop at CMU",
+                      },
+                      {
+                        text: "Mar 14\u201316 \u2014 Berkeley EECS Visit Days",
+                      },
+                      {
+                        text: "Mar 25\u201328 \u2014 CMU S3D Open House",
+                      },
+                    ],
+                  },
+                ],
+              },
+              {
+                name: "Grid",
+                attrs: { gap: 4, base: 1, md: 2 },
+                children: [
+                  {
+                    name: "VStack",
+                    attrs: { gap: 2 },
+                    children: [
+                      {
+                        name: "Heading",
+                        attrs: { level: 3 },
+                        children: [{ text: "📚 Recent publications" }],
+                      },
+                      {
+                        name: "VStack",
+                        attrs: { gap: 3 },
+                        children: [
+                      {
+                        name: "VStack",
+                        attrs: { gap: 1 },
+                        children: [
+                          {
+                            name: "Text",
+                            attrs: {},
+                            children: [
+                              {
+                                text: "PLATEAU 2026 — A Semantically Grounded Visualization of React Hooks",
+                              },
+                            ],
+                          },
+                          {
+                            name: "HStack",
+                            attrs: { gap: 2 },
+                            children: [
+                              {
+                                name: "Link",
+                                attrs: {
+                                  href: "https://github.com/Zeta611/react-trace",
+                                  icon: "github",
+                                },
+                                children: [{ text: "github" }],
+                              },
+                              {
+                                name: "Link",
+                                attrs: {
+                                  href: "https://2026.plateau-workshop.org/program",
+                                  icon: "link",
+                                },
+                                children: [{ text: "event" }],
+                              },
+                              {
+                                name: "Link",
+                                attrs: {
+                                  href: "https://react-trace.jaylee.xyz/",
+                                  icon: "link",
+                                },
+                                children: [{ text: "live" }],
+                              },
+
+                            ],
+                          },
+                        ],
+                      },
                       {
                         name: "VStack",
                         attrs: { gap: 1 },
@@ -249,7 +337,7 @@ export const BUILTIN_COMMANDS: Record<
                               {
                                 name: "Link",
                                 attrs: {
-                                  href: "https://react-trace.vercel.app/",
+                                  href: "https://react-trace.jaylee.xyz/",
                                   icon: "link",
                                 },
                                 children: [{ text: "live" }],
@@ -294,7 +382,7 @@ export const BUILTIN_COMMANDS: Record<
                               {
                                 name: "Link",
                                 attrs: {
-                                  href: "https://redemon-ui.vercel.app/",
+                                  href: "https://redemon-ui.jaylee.xyz/",
                                   icon: "link",
                                 },
                                 children: [{ text: "live" }],
@@ -352,36 +440,41 @@ export const BUILTIN_COMMANDS: Record<
                   },
                 ],
               },
-              {
-                name: "VStack",
-                attrs: { gap: 2 },
-                children: [
                   {
-                    name: "Heading",
-                    attrs: { level: 3 },
-                    children: [{ text: "Recent honors" }],
-                  },
-                  {
-                    name: "List",
-                    attrs: {},
+                    name: "VStack",
+                    attrs: { gap: 2 },
                     children: [
                       {
-                        text: "Oct 2025 — UIST 2025 Best Poster Honorable Mention Award 🏅",
+                        name: "Heading",
+                        attrs: { level: 3 },
+                        children: [{ text: "🏆 Recent honors" }],
                       },
                       {
-                        text: "Aug 2025 — SIGPL Summer School 2025 Presentation Award (1st place 🥇)",
-                      },
-                      {
-                        text: "Jun 2025 — PLDI 2025 SRC Graduate Category (2nd place 🥈)",
-                      },
-                      {
-                        text: "Sep 2024 — Outstanding Teaching Assistant Award (SNU Engineering)",
-                      },
-                      {
-                        text: "Aug 2024 — SIGPL Summer School 2024 Presentation Award (2nd place 🥈)",
-                      },
-                      {
-                        text: "Mar 2018–Feb 2024 — Presidential Science Scholarship (Korea Student Aid Foundation)",
+                        name: "List",
+                        attrs: {},
+                        children: [
+                          {
+                            text: "Feb 2026 — Outstanding Master's Thesis Award (SNU CSE)",
+                          },
+                          {
+                            text: "Oct 2025 — UIST 2025 Best Poster Honorable Mention Award",
+                          },
+                          {
+                            text: "Aug 2025 — SIGPL Summer School 2025 Presentation Award (1st place 🥇)",
+                          },
+                          {
+                            text: "Jun 2025 — PLDI 2025 SRC Graduate Category (2nd place 🥈)",
+                          },
+                          {
+                            text: "Sep 2024 — Outstanding Teaching Assistant Award (SNU Engineering)",
+                          },
+                          {
+                            text: "Aug 2024 — SIGPL Summer School 2024 Presentation Award (2nd place 🥈)",
+                          },
+                          {
+                            text: "Mar 2018–Feb 2024 — Presidential Science Scholarship (Korea Student Aid Foundation)",
+                          },
+                        ],
                       },
                     ],
                   },
