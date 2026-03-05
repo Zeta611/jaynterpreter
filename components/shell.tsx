@@ -66,6 +66,8 @@ function History() {
   );
 }
 
+const INITIAL_COMMANDS = ["fetch", "news", "help"];
+
 export default function InteractiveShell() {
   const { shellState: state, run } = useShell();
   const endRef = useRef<HTMLDivElement | null>(null);
@@ -73,13 +75,14 @@ export default function InteractiveShell() {
   useEffect(() => {
     if (state.history.length > 0) return;
     (async () => {
-      await run("fetch");
-      await run("news");
-      await run("help");
+      for (const cmd of INITIAL_COMMANDS) {
+        await run(cmd);
+      }
     })();
   }, [state.history.length, run]);
 
   useEffect(() => {
+    if (state.history.length <= INITIAL_COMMANDS.length) return;
     endRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
   }, [state.history.length]);
 

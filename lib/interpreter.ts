@@ -93,7 +93,7 @@ export const BUILTIN_COMMANDS: Record<
                     attrs: { variant: "muted" },
                     children: [
                       {
-                        text: "M.S. student in Computer Science and Engineering at Seoul National University (SNU)",
+                        text: "M.S. CSE (2026) · B.S. ECE (2024) @ Seoul National University",
                       },
                     ],
                   },
