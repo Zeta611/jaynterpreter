@@ -169,9 +169,14 @@ export const BUILTIN_COMMANDS: Record<
                     attrs: {},
                     children: [
                       {
-                        text: "I\u2019m traveling across the US this month to explore what\u2019s next! 🎉 Feel free to reach out if you want to grab coffee \u2014 I\u2019m open to advice, research ideas, and conversations of all kinds!",
+                        text: "I\u2019m starting a CS PhD at UC Berkeley this Fall, working with Sarah Chasins at the PLAIT lab! 🎉",
                       },
                     ],
+                  },
+                  {
+                    name: "Heading",
+                    attrs: { level: 3 },
+                    children: [{ text: "📰 Past news" }],
                   },
                   {
                     name: "List",
