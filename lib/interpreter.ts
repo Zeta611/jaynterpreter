@@ -93,7 +93,7 @@ export const BUILTIN_COMMANDS: Record<
                     attrs: { variant: "muted" },
                     children: [
                       {
-                        text: "M.S. CSE (2026) · B.S. ECE (2024) @ Seoul National University",
+                        text: "CS PhD Student @ UC Berkeley • CSE MS & ECE BS @ Seoul National University",
                       },
                     ],
                   },
@@ -169,7 +169,7 @@ export const BUILTIN_COMMANDS: Record<
                     attrs: {},
                     children: [
                       {
-                        text: "I\u2019m starting a CS PhD at UC Berkeley this Fall, working with Sarah Chasins at the PLAIT lab! 🎉",
+                        text: "I\u2019ll be at SPLASH 2026 in Oakland from Oct 4 to 7!",
                       },
                     ],
                   },
